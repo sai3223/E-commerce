@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ElectroMart - Home</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
+    header { background: #222; color: #fff; padding: 15px; text-align: center; }
+    .container { display: flex; flex-wrap: wrap; justify-content: center; margin: 20px; }
+    .product { background: #fff; margin: 15px; padding: 15px; border-radius: 10px; box-shadow: 0 0 8px rgba(0,0,0,0.2); width: 220px; text-align: center; }
+    .product img { width: 100%; height: 150px; object-fit: cover; }
+    .btn { padding: 10px 15px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; }
+    .add { background: #007BFF; color: #fff; }
+    .buy { background: #28a745; color: #fff; }
+    nav { background: #333; padding: 10px; text-align: center; }
+    nav a { color: #fff; margin: 0 15px; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ElectroMart</h1>
+  </header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="cart.html">Cart</a>
+  </nav>
+
+  <div class="container">
+    <div class="product">
+      <img src="https://via.placeholder.com/200x150" alt="Laptop">
+      <h3>Laptop</h3>
+      <p>₹50,000</p>
+      <button class="btn add" onclick="addToCart('Laptop',50000)">Add to Cart</button>
+      <button class="btn buy" onclick="buyNow('Laptop',50000)">Buy Now</button>
+    </div>
+
+    <div class="product">
+      <img src="https://via.placeholder.com/200x150" alt="Headphones">
+      <h3>Headphones</h3>
+      <p>₹2,000</p>
+      <button class="btn add" onclick="addToCart('Headphones',2000)">Add to Cart</button>
+      <button class="btn buy" onclick="buyNow('Headphones',2000)">Buy Now</button>
+    </div>
+
+    <div class="product">
+      <img src="https://via.placeholder.com/200x150" alt="Smartphone">
+      <h3>Smartphone</h3>
+      <p>₹25,000</p>
+      <button class="btn add" onclick="addToCart('Smartphone',25000)">Add to Cart</button>
+      <button class="btn buy" onclick="buyNow('Smartphone',25000)">Buy Now</button>
+    </div>
+  </div>
+
+  <script>
+    function addToCart(name, price) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({name, price});
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(name + " added to cart!");
+    }
+
+    function buyNow(name, price) {
+      localStorage.setItem("cart", JSON.stringify([{name, price}]));
+      window.location.href = "payment.html";
+    }
+  </script>
+</body>
+</html>
