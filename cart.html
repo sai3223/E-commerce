@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart</title>
+  <style>
+    body { font-family: Arial; background: #f4f4f4; }
+    header { background: #222; color: #fff; padding: 15px; text-align: center; }
+    table { width: 80%; margin: 20px auto; border-collapse: collapse; }
+    table, th, td { border: 1px solid #333; }
+    th, td { padding: 12px; text-align: center; }
+    .btn { background: #28a745; padding: 10px 20px; color: #fff; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Your Cart</h1>
+  </header>
+  <table>
+    <thead>
+      <tr><th>Product</th><th>Price</th></tr>
+    </thead>
+    <tbody id="cart-items"></tbody>
+  </table>
+  <div style="text-align:center;">
+    <h3 id="total"></h3>
+    <button class="btn" onclick="proceedToPayment()">Proceed to Payment</button>
+  </div>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cartTable = document.getElementById("cart-items");
+    let total = 0;
+
+    cart.forEach(item => {
+      let row = `<tr><td>${item.name}</td><td>₹${item.price}</td></tr>`;
+      cartTable.innerHTML += row;
+      total += item.price;
+    });
+
+    document.getElementById("total").innerText = "Total: ₹" + total;
+
+    function proceedToPayment() {
+      if(cart.length === 0){
+        alert("Cart is empty!");
+      } else {
+        window.location.href = "payment.html";
+      }
+    }
+  </script>
+</body>
+</html>
